@@ -1,7 +1,6 @@
 package com.example.dating_ai_backend.profiles;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 
 public record Profile(    

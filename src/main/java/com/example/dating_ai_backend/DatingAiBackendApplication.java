@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-
 import com.example.dating_ai_backend.profiles.Gender;
 import com.example.dating_ai_backend.profiles.Profile;
 import com.example.dating_ai_backend.profiles.ProfileRepository;
