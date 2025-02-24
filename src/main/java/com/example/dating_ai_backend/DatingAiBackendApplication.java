@@ -29,8 +29,10 @@ public class DatingAiBackendApplication  implements CommandLineRunner{
 	}
 
 	public void run(String... args){
+		profileRepository.deleteAll();
+		conversationRepository.deleteAll();
 		Profile profile = new Profile(
-			"123",
+			"1",
 			"Jane",
 			"Doe",
 			28,
@@ -41,10 +43,23 @@ public class DatingAiBackendApplication  implements CommandLineRunner{
 			"INTJ"
 		);
 
+		Profile profile2 = new Profile(
+			"2",
+			"Tany",
+			"Changala",
+			28,
+			"Asian",
+			Gender.FEMALE,
+			"Bio of tany",
+			"http://example.com/image.png",
+			"INTJ"
+		);
+
 		Conversation conversation = new Conversation("1", profile.id(), List.of(
 			new ChatMessage("Hii", profile.id(), LocalDateTime.now())
 		));
 		profileRepository.save(profile);
+		profileRepository.save(profile2);
 		profileRepository.findAll().forEach(System.out::println);
 
 		conversationRepository.save(conversation);
