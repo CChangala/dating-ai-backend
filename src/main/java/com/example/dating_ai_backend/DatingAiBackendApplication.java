@@ -3,6 +3,9 @@ package com.example.dating_ai_backend;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,11 +27,17 @@ public class DatingAiBackendApplication  implements CommandLineRunner{
 	@Autowired
 	private ConversationRepository conversationRepository;
 
+	@Autowired
+	private OllamaChatModel chatClient;
+
 	public static void main(String[] args) {
 		SpringApplication.run(DatingAiBackendApplication.class, args);
 	}
 
 	public void run(String... args){
+		Prompt prompt = new Prompt("Who is brad pitt??");
+		ChatResponse response = chatClient.call(prompt);
+		System.out.println(response.getResult().getOutput().getText());
 		profileRepository.deleteAll();
 		conversationRepository.deleteAll();
 		Profile profile = new Profile(
