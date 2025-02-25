@@ -27,11 +27,11 @@ After launching the application, follow these steps to interact with AI-generate
 
 ### 1. Clone the Repository
 ### 2. Configure Environment Variables
-OLLAMA_API_HOST=localhost # or the appropriate IP address if not running locally
-OLLAMA_API_PORT=5000      # the port your Ollama service is running on
+- OLLAMA_API_HOST=localhost # or the appropriate IP address if not running locally
+- OLLAMA_API_PORT=5000      # the port your Ollama service is running on
 ### 3. Build the Application
-mvn clean install
-mvn spring-boot:run
+- mvn clean install
+- mvn spring-boot:run
 
 ## API Endpoints
 
