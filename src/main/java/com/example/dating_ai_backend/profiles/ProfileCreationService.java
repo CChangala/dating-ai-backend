@@ -1,5 +1,6 @@
 package com.example.dating_ai_backend.profiles;
 
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class ProfileCreationService {
     @Value("#{${tinderai.character.user}}")
     private Map<String, String> userProfileProperties;
 
-    private static final String PROFILES_FILE_PATH = "../../../../../../../profiles.json";
+    private static final String PROFILES_FILE_PATH = "profiles.json";
 
     public ProfileCreationService(ProfileRepository profileRepository){
         this.profileRepository = profileRepository;
@@ -28,7 +29,11 @@ public class ProfileCreationService {
     public void saveProfilesToDB() {
         Gson gson = new Gson();
         try {
-            List<Profile> profiles= gson.fromJson(PROFILES_FILE_PATH, new TypeToken<ArrayList<Profile>>() {}.getType());
+
+            List<Profile> profiles= gson.fromJson(
+                    new FileReader(PROFILES_FILE_PATH),
+                    new TypeToken<ArrayList<Profile>>() {}.getType()
+            );
             if (profiles != null) {
                 // Delete all current profiles and save new ones from JSON
                 profileRepository.deleteAll();
