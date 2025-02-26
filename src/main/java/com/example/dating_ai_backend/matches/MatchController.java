@@ -13,6 +13,8 @@ import com.example.dating_ai_backend.conversations.Conversation;
 import com.example.dating_ai_backend.conversations.ConversationRepository;
 import com.example.dating_ai_backend.profiles.Profile;
 import com.example.dating_ai_backend.profiles.ProfileRepository;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
@@ -31,6 +33,7 @@ public class MatchController {
         this.matchRepository = matchRepository;
     }
 
+    @CrossOrigin(origins ="*")
     @PostMapping("/matches")
     public Match createMatchRequest(@RequestBody createMatchRequest request) {
 
@@ -39,6 +42,8 @@ public class MatchController {
 
 
         //TODO Make sure there are no existing conversations
+
+        
 
         Conversation conversation = new Conversation(
             UUID.randomUUID().toString()
@@ -60,7 +65,7 @@ public class MatchController {
 
     }
 
-
+    @CrossOrigin(origins ="*")
     @GetMapping("/matches")
     public List<Match> getAllMatches() {
         return matchRepository.findAll();

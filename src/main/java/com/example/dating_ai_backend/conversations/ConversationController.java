@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -27,12 +28,14 @@ public class ConversationController {
         this.profileRepository = profileRepository;
     }
 
+    @CrossOrigin(origins ="*")
     @GetMapping("/conversation/{conversationId}")
     public Conversation getConversation(@PathVariable String conversationId) {
         return conversationRepository.findById(conversationId)
         .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"no such conversation found"));
     }
 
+    @CrossOrigin(origins ="*")
     @PostMapping("/conversations")
     public Conversation createConversation(@RequestBody CreateConversationRequest request) {
         profileRepository.findById(request.profileId()).
@@ -44,6 +47,7 @@ public class ConversationController {
         return conversation;
     }
 
+    @CrossOrigin(origins ="*")
     @PostMapping("/conversations/{conversationId}")
     public Conversation addMessageToConversation(
         @PathVariable String conversationId,
