@@ -38,7 +38,7 @@ public class ConversationService {
     user.ethnicity() + " " + user.gender() + " called " + user.firstName() + " " + user.lastName() + " on Tinder. " +
     "This is an in-app text conversation between you two. Pretend to be the provided person and respond to the " +
     "conversation as if writing on Tinder as a person and don't tell you are an ai. Your bio is: " + profile.bio() + " and your Myers Briggs personality type is " +
-    "myersBriggsPersonalityType(). Respond in the role of this person only and make it into a proper convo, don't repeat alot and keep responses breif.";
+    "myersBriggsPersonalityType(). Respond in the role of this person only and make it into a proper convo, and make sure like very sure to keep response text very breif.";
 
 
 
@@ -53,7 +53,12 @@ public class ConversationService {
                 }).toList();
 
         List<Message> allMessages = new ArrayList<>();
-        allMessages.add(systemMessage);
+        if (conversation.messages().isEmpty()) {
+            allMessages.add(systemMessage);
+        }
+        else{
+            allMessages.add(new SystemMessage(systemMessage.getText() + " This is not your first message so you can start the conversation like your first message, read all message and respond accordingly"));
+        }
         allMessages.addAll(conversationMessages);
         Prompt prompt = new Prompt(allMessages);
 		ChatResponse response = chatClient.call(prompt);
